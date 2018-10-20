@@ -1,0 +1,40 @@
+<template>
+    <h1>Flights</h1>
+
+    <p if.bind="!forecasts"><em>Loading...</em></p>
+
+    <div class="row" model.bind="forecasts" style="margin-left: 1rem;">
+        <div repeat.for="forecast of forecasts" style="margin-bottom: 1rem;">
+            <div class="row">
+            <h2>${ forecast.name }</h2>
+            <img src.bind="forecast.rocket.imageURL" width="320px" />
+            <span>Start: ${ forecast.windowstart } </span>
+            <span>End: ${ forecast.windowend } </span>
+            <span> Agencies: <span repeat.for="agency of forecast.rocket.agencies"> </span> </span>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Flight Date</th>
+                <th>Rocket Image</th>
+                <th>Weather summary</th>
+                <th>Probability to launch</th>
+            </tr>
+        </thead>
+        <tbody model.bind="forecasts">
+            <tr repeat.for="forecast of forecasts">
+                <td>
+                    Start: ${ forecast.windowstart }
+                    <br/>
+                    End: ${ forecast.windowend }
+                </td>
+                <td><img src.bind="forecast.rocket.imageURL" width="320px"/></td>
+                <td>${ forecast.temperatureF }</td>
+                <td>${ forecast.summary }</td>
+            </tr>
+        </tbody>
+    </table>
+</template>
